@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Account = require('../models/Account');
 
 const createUser = async (req, res) => {
   try {
@@ -21,7 +22,25 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        // Tìm và xóa tài khoản đăng nhập liên quan
+        await Account.findOneAndDelete({ refId: userId, refModel: 'User' });
+        // Tìm và xóa hồ sơ người dùng
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'Không tìm thấy người dùng' });
+        }
+        res.status(200).json({ message: 'Người dùng đã được xóa thành công' });
+    } catch (error) {
+        res.status(500).json({ message: 'Lỗi khi xóa người dùng' });
+    }
+};
+
 module.exports = {
   createUser,
-  getAllUsers
+  getAllUsers,
+  deleteUser
 };
