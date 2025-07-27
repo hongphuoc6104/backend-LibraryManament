@@ -1,3 +1,16 @@
+// /**
+//  * ---------------------------------------------------------------------------------------------
+//  * Tên dự án: Website Quản lý Thư viện Trực tuyến
+//  * ---------------------------------------------------------------------------------------------
+//  * Mô tả: File API thêm, xóa. Kiểm tra số lượng sách mượn <=3, lấy tất cả phiếu mượn, lấy trạng thái....
+//  *
+//  * @author  Nguyễn Nhật Hồng Phước
+//  * @mssv    B2308385
+//  * @date    27/07/2025
+//  *
+//  * @copyright (c) 2025 Nguyễn Nhật Hồng Phước. All rights reserved.
+//  * ---------------------------------------------------------------------------------------------
+//  */ 
 const Borrow = require('../models/Borrow')
 const Book = require('../models/Book');
 
@@ -27,7 +40,6 @@ const createBorrow = async (req, res) => {
         }
         // --- KẾT THÚC LOGIC KIỂM TRA ---
         
-        // Các bước còn lại giữ nguyên
         const book = await Book.findById(bookId);
         if (!book || book.soQuyen <= 0) {
             return res.status(400).json({ message: 'Sách đã hết hoặc không tồn tại.' });
@@ -45,16 +57,11 @@ const createBorrow = async (req, res) => {
     }
 };
 
-// ... các hàm khác giữ nguyên
-
-// file: controllers/borrowController.js
-
 const getBorrowHistoryByUser = async (req, res) => {
     try {
-        // Sửa lại: Dùng `borrowerId` thay vì `userId`
         const borrows = await Borrow.find({ borrowerId: req.params.userId })
-            .populate('borrowerId') // 👈 Thêm vào: Lấy thông tin người mượn
-            .populate('bookId');   // Giữ lại: Lấy thông tin sách
+            .populate('borrowerId') 
+            .populate('bookId');   
             
         res.status(200).json(borrows);
    } catch(error) {
@@ -65,7 +72,6 @@ const getBorrowHistoryByUser = async (req, res) => {
 
 const getAllBorrows = async (req, res) => {
     try {
-        // Chỉ cần populate `borrowerId`, Mongoose sẽ tự động dùng refPath
         const borrows = await Borrow.find().populate('borrowerId').populate('bookId');
         res.status(200).json(borrows);
     } catch (error) {
@@ -81,7 +87,7 @@ const markAsReturned = async (req, res) => {
             borrowId,
             {
                 status: 'Đã trả',
-                ngayThucTra: new Date() // Ghi lại ngày trả là ngày hiện tại
+                ngayThucTra: new Date()
             },
             { new: true }
         );

@@ -1,3 +1,16 @@
+// /**
+//  * ---------------------------------------------------------------------------------------------
+//  * Tên dự án: Website Quản lý Thư viện Trực tuyến
+//  * ---------------------------------------------------------------------------------------------
+//  * Mô tả: tạo tài khoản kiểm tra hệ thống.
+//  *
+//  * @author  Nguyễn Nhật Hồng Phước
+//  * @mssv    B2308385
+//  * @date    27/07/2025
+//  *
+//  * @copyright (c) 2025 Nguyễn Nhật Hồng Phước. All rights reserved.
+//  * ---------------------------------------------------------------------------------------------
+//  */ 
 const Account = require('../models/Account');
 const Staff = require('../models/Staff');
 const bcrypt = require('bcryptjs');
@@ -28,7 +41,7 @@ async function createRootAdmin() {
   });
 
   await rootAccount.save();
-  console.log('✅ Đã tạo tài khoản root admin mặc định');
+  console.log(' Đã tạo tài khoản root admin mặc định');
 }
 
 module.exports = createRootAdmin;

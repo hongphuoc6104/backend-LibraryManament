@@ -1,3 +1,16 @@
+// /**
+//  * ---------------------------------------------------------------------------------------------
+//  * Tên dự án: Website Quản lý Thư viện Trực tuyến
+//  * ---------------------------------------------------------------------------------------------
+//  * Mô tả: File thêm sửa xóa thông tin nhân viên
+//  *
+//  * @author  Nguyễn Nhật Hồng Phước
+//  * @mssv    B2308385
+//  * @date    27/07/2025
+//  *
+//  * @copyright (c) 2025 Nguyễn Nhật Hồng Phước. All rights reserved.
+//  * ---------------------------------------------------------------------------------------------
+//  */ 
 const Staff = require('../models/Staff');
 const Account = require('../models/Account');
 const bcrypt = require('bcryptjs');
@@ -56,31 +69,30 @@ const deleteStaff = async (req, res) => {
 };
 
 // Lấy danh sách nhân viên
-// file: controllers/staffController.js
 const getAllStaff = async (req, res) => {
     try {
         const staffList = await Staff.aggregate([
             {
                 $lookup: {
-                    from: 'accounts', // Tên collection của Account trong MongoDB
+                    from: 'accounts', 
                     localField: '_id',
                     foreignField: 'refId',
                     as: 'accountInfo'
                 }
             },
             {
-                $unwind: { // Giải nén mảng accountInfo
+                $unwind: { 
                     path: '$accountInfo',
-                    preserveNullAndEmptyArrays: true // Vẫn giữ lại staff dù chưa có account
+                    preserveNullAndEmptyArrays: true 
                 }
             },
             {
-                $project: { // Chọn các trường muốn trả về
+                $project: { 
                     hoTenNV: 1,
                     chucVu: 1,
                     diaChi: 1,
                     soDienThoai: 1,
-                    accountId: '$accountInfo._id', // Lấy ID của account
+                    accountId: '$accountInfo._id', 
                     email: '$accountInfo.email',
                     role: '$accountInfo.role'
                 }

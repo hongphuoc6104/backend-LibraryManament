@@ -1,3 +1,16 @@
+// /**
+//  * ---------------------------------------------------------------------------------------------
+//  * Tên dự án: Website Quản lý Thư viện Trực tuyến
+//  * ---------------------------------------------------------------------------------------------
+//  * Mô tả: File API thêm, sửa, xóa. Lấy sách theo mã, lấy tất cả sách, lấy sách số lượng = 0
+//  *
+//  * @author  Nguyễn Nhật Hồng Phước
+//  * @mssv    B2308385
+//  * @date    27/07/2025
+//  *
+//  * @copyright (c) 2025 Nguyễn Nhật Hồng Phước. All rights reserved.
+//  * ---------------------------------------------------------------------------------------------
+//  */ 
 const Book = require('../models/Book');
 const Borrow = require('../models/Borrow');
 
@@ -78,7 +91,6 @@ const deleteBook = async (req, res) => {
 
 const getOutOfStockBooks = async (req, res) => {
     try {
-        // Xóa điều kiện `isActive`
         const outOfStockBooks = await Book.find({ soQuyen: 0 }).populate('maNXB', 'tenNXB');
         res.status(200).json(outOfStockBooks);
     } catch (error) {

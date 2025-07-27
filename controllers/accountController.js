@@ -1,3 +1,16 @@
+// /**
+//  * ---------------------------------------------------------------------------------------------
+//  * Tên dự án: Website Quản lý Thư viện Trực tuyến
+//  * ---------------------------------------------------------------------------------------------
+//  * Mô tả: File xây dựng các API đăng nhập (tạo token 1h), đăng ký, lấy thông tin các tài khoản.
+//  *
+//  * @author  Nguyễn Nhật Hồng Phước
+//  * @mssv    B2308385
+//  * @date    27/07/2025
+//  *
+//  * @copyright (c) 2025 Nguyễn Nhật Hồng Phước. All rights reserved.
+//  * ---------------------------------------------------------------------------------------------
+//  */ 
 const Account = require('../models/Account')
 const User = require('../models/User')
 const Staff = require('../models/Staff')
@@ -36,7 +49,6 @@ const login = async (req, res) => {
     const match = await bcrypt.compare(password, account.password);
     if (!match) return res.status(401).json({ message: "Mật khẩu không chính xác" });
 
-    // Lấy thông tin liên kết người dùng hoặc nhân viên
     let userInfo = {};
     if (account.refModel === 'User') {
       const user = await User.findById(account.refId);
@@ -46,10 +58,10 @@ const login = async (req, res) => {
       if (staff) userInfo = { userId: account.refId, hoTenNV: staff.hoTenNV, chucVu: staff.chucVu, role: account.role };
     }
 
-    // Tạo token
+
     const token = jwt.sign(
       { id: account._id, role: account.role },
-      'your_secret_key',         // Nên dùng biến môi trường .env cho an toàn
+      'your_secret_key',         
       { expiresIn: '1h' }
     );
 

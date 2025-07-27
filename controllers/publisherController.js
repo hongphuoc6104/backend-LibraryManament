@@ -1,3 +1,16 @@
+// /**
+//  * ---------------------------------------------------------------------------------------------
+//  * Tên dự án: Website Quản lý Thư viện Trực tuyến
+//  * ---------------------------------------------------------------------------------------------
+//  * Mô tả: File thêm sửa xóa nhà xuất bản
+//  *
+//  * @author  Nguyễn Nhật Hồng Phước
+//  * @mssv    B2308385
+//  * @date    27/07/2025
+//  *
+//  * @copyright (c) 2025 Nguyễn Nhật Hồng Phước. All rights reserved.
+//  * ---------------------------------------------------------------------------------------------
+//  */ 
 const Publisher = require('../models/Publisher');
 const Book = require('../models/Book');
 
@@ -21,8 +34,6 @@ const getAllPublishers = async (req, res) => {
     res.status(500).json({ message: 'Lỗi khi lấy danh sách nhà xuất bản' });
   }
 };
-
-// Thêm 2 hàm này vào file publisherController.js
 
 const updatePublisher = async (req, res) => {
     try {
