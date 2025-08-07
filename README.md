@@ -9,8 +9,9 @@ npm install
 cd path/to/frontend-LibraryManament-main
 npm install
 
-tạo thêm file env nội dung như sau:
+# tạo thêm file env nội dung như sau:
 MONGO_URI=mongodb://localhost:27017/myapp
+
 JWT_SECRET=BatNgoChua123
 
 # cách chạy: 
