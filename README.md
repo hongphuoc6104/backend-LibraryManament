@@ -13,7 +13,7 @@ tạo thêm file env nội dung như sau:
 MONGO_URI=mongodb://localhost:27017/myapp
 JWT_SECRET=BatNgoChua123
 
-#cách chạy: 
-#cd path/to/frontend-LibraryManament-main
-#npm run dev
-#lưu ý chạy mongodb trước khi chạy lệnh trên.
+# cách chạy: 
+# cd path/to/frontend-LibraryManament-main
+# npm run dev
+# lưu ý chạy mongodb trước khi chạy lệnh trên.
